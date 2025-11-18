@@ -1,0 +1,14 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.files]
+zshrc = "~/.zshrc"
+p10k="~/.p10k.zsh"
+config ="~/.config"
+
+[default.variables]
+
+[settings]
+default_target_type = "automatic"
