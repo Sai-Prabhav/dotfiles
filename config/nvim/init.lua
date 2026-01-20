@@ -2,8 +2,6 @@
 require 'custom.options'
 -- [[ Fold ]]
 
-local opt = vim.opt
-
 -- [[ Basic Keymaps ]]
 require 'custom.keybind'
 
@@ -35,8 +33,8 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   {
-    "RedsXDD/neopywal.nvim",
-    name = "neopywal",
+    'RedsXDD/neopywal.nvim',
+    name = 'neopywal',
     lazy = false,
     priority = 1000,
     opts = {},
@@ -57,9 +55,9 @@ require('lazy').setup({
   {
     'mrcjkb/haskell-tools.nvim',
     version = '^6', -- Recommended
-    lazy = false,   -- This plugin is already lazy
+    lazy = false, -- This plugin is already lazy
   },
-  'lervag/vimtex',  -- Ensure vimtex is loaded
+  'lervag/vimtex', -- Ensure vimtex is loaded
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
@@ -76,7 +74,7 @@ require('lazy').setup({
     },
   },
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
@@ -145,7 +143,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -226,7 +224,7 @@ require('lazy').setup({
         builtin.find_files { cwd = '~/.dotfiles/' }
       end, { desc = '[S]earch [C]onfigc files' })
       vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = '~/.dotfiles/nvim/' }
+        builtin.find_files { cwd = '~/.dotfiles/config/nvim/' }
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
@@ -485,7 +483,7 @@ require('lazy').setup({
           stdin = true,
         },
         clang_format = {
-          prepend_args = { '--style={IndentWidth: 4, TabWidth: 4, UseTab: Never,ColumnLimit: 56}' },
+          prepend_args = { '--style={IndentWidth: 2, TabWidth: 2, UseTab: Never,ColumnLimit: 64 }' },
         },
         prettier = {
           prepend_args = { '--print-width', '56' },
@@ -512,7 +510,15 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
@@ -616,22 +622,21 @@ require('lazy').setup({
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
+    config = function() end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    priority = 0,
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require('tokyonight').setup {
+        styles = {
+          comments = { italic = false },
+        },
+      }
+      vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-  --  {
-  --    'folke/tokyonight.nvim',
-  --    priority = 0,
-  --    config = function()
-  --      ---@diagnostic disable-next-line: missing-fields
-  --      require('tokyonight').setup {
-  --        styles = {
-  --          comments = { italic = false },
-  --        },
-  --      }
-  --      vim.cmd.colorscheme 'tokyonight-night'
-  --    end,
-  --  },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -717,6 +722,7 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   require 'custom.web-dev',
+  require 'custom.codeforces',
 }, {
   ui = {
 
@@ -739,9 +745,9 @@ require('lazy').setup({
 })
 -- [Colorscheme using neopywal]
 
-local neopywal = require("neopywal")
+local neopywal = require 'neopywal'
 neopywal.setup()
-vim.cmd.colorscheme("neopywal-dark")
+-- vim.cmd.colorscheme("neopywal")
 -- [[ Load Snippets ]]
 -- First, setup LuaSnip with proper defaults
 require('luasnip').setup {
@@ -755,7 +761,7 @@ require('luasnip').setup {
 
 -- Then load your snippets
 require('luasnip.loaders.from_lua').lazy_load {
-  paths = { '~/nixos-config/nvim/LuaSnip' },
+  paths = { '~/.config/nvim/LuaSnip' },
   enable_autosnippets = true,
 }
 

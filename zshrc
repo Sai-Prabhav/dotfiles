@@ -116,3 +116,12 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 (cat ~/.cache/wal/sequences &)
 export PATH="/home/greenflame41/.local/bin:$PATH"
+export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+
+# opencode
+export PATH=/home/greenflame41/.opencode/bin:$PATH
+
+alias disksp='sudo du -cha --max-depth=1 . | grep -E "G|M"'
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
