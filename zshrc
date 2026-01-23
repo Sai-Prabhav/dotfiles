@@ -122,6 +122,7 @@ export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
 export PATH=/home/greenflame41/.opencode/bin:$PATH
 
 alias disksp='sudo du -cha --max-depth=1 . | grep -E "G|M"'
+alias ls='ls --color --hyperlink=auto'
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"

@@ -722,7 +722,6 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   require 'custom.web-dev',
-  require 'custom.codeforces',
 }, {
   ui = {
 
