@@ -121,8 +121,24 @@ export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
 # opencode
 export PATH=/home/greenflame41/.opencode/bin:$PATH
 
-alias disksp='sudo du -cha --max-depth=1 . | grep -E "G|M"'
+
+disksp() {
+    local dir="${1:-./}"
+    sudo du -ha --max-depth=1 "$dir" 2>/dev/null |
+    rg -e '[0-9]+(\.[0-9])*(G|M)' |
+    sort -hr  |
+    rg -e '[0-9]+(\.[0-9])*(G|M)'
+}
+
+alias icat="kitten icat"
 alias ls='ls --color --hyperlink=auto'
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+
+[ -f "/home/greenflame41/.ghcup/env" ] && . "/home/greenflame41/.ghcup/env" # ghcup-env
+
+eval "$(zoxide init zsh)"
+
+alias cd='z'
+alias cat='bat'

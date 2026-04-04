@@ -1,9 +1,19 @@
+--
+--
+local function safe_require(mod)
+  local ok, result = pcall(require, mod)
+  if not ok then
+    vim.notify('Failed to load: ' .. mod .. '\n' .. result, vim.log.levels.WARN)
+  end
+  return ok and result or {}
+end
+
 -- [[ Basic Option ]]
-require 'custom.options'
+safe_require 'custom.options'
 -- [[ Fold ]]
 
 -- [[ Basic Keymaps ]]
-require 'custom.keybind'
+safe_require 'custom.keybind'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -19,6 +29,8 @@ end
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
+
+
 
 -- [[ Configure and install plugins ]]
 --
@@ -462,18 +474,7 @@ require('lazy').setup({
     opts = {
       notify_on_error = true,
       format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = {}
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nil
-        else
-          return {
-            timeout_ms = 500,
-            lsp_format = 'fallback',
-          }
-        end
+        return nil
       end,
       formatters = {
         ormolu = { command = 'ormolu' },
@@ -483,7 +484,7 @@ require('lazy').setup({
           stdin = true,
         },
         clang_format = {
-          prepend_args = { '--style={IndentWidth: 2, TabWidth: 2, UseTab: Never,ColumnLimit: 64 }' },
+          prepend_args = { '--style={IndentWidth: 2, TabWidth: 2, UseTab: Never,ColumnLimit: 80 }' },
         },
         prettier = {
           prepend_args = { '--print-width', '56' },
@@ -678,6 +679,13 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  {
+    'jedrzejboczar/exrc.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' }, -- only needed for the UI picker
+    config = function()
+      require('exrc').setup {}
+    end,
+  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -713,15 +721,13 @@ require('lazy').setup({
   --
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-  require 'custom.web-dev',
+  safe_require 'kickstart.plugins.indent_line',
+  safe_require 'kickstart.plugins.autopairs',
+  safe_require 'kickstart.plugins.neo-tree',
+  safe_require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  safe_require 'plugins.image',
+  safe_require 'custom.web-dev',
 }, {
   ui = {
 
@@ -765,8 +771,9 @@ require('luasnip.loaders.from_lua').lazy_load {
 }
 
 -- [[ Latex config ]]
-require 'custom.latex_config'
+safe_require 'custom.latex_config'
 
-require 'custom.snip'
+
+safe_require 'custom.snip'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
