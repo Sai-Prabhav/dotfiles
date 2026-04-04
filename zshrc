@@ -117,7 +117,8 @@ source $ZSH/oh-my-zsh.sh
 (cat ~/.cache/wal/sequences &)
 export PATH="/home/greenflame41/.local/bin:$PATH"
 export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
-
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/lib/rustup/bin:$PATH"
 # opencode
 export PATH=/home/greenflame41/.opencode/bin:$PATH
 

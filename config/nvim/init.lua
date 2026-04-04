@@ -30,8 +30,6 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
-
-
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -287,6 +285,24 @@ require('lazy').setup({
         },
       }
       lspconfig.pyright.setup {}
+      lspconfig.rust_analyzer.setup {
+        cmd = { 'rust-analyzer' },
+        filetypes = { 'rust' },
+        root_dir = require('lspconfig.util').root_pattern('Cargo.toml'),
+        on_attach = function(client, bufnr)
+          vim.diagnostic.enable(bufnr)
+        end,
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              enable = true,
+            },
+            cargo = {
+              allTargets = true,
+            },
+          },
+        },
+      }
       lspconfig.clangd.setup {}
       lspconfig.hls.setup {
         filetypes = { 'haskell', 'lhaskell', 'cabal' },
@@ -505,6 +521,7 @@ require('lazy').setup({
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
         haskell = { 'ormolu', 'lsp' },
+        rust = { 'rustfmt' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -750,9 +767,6 @@ require('lazy').setup({
 })
 -- [Colorscheme using neopywal]
 
-local neopywal = require 'neopywal'
-neopywal.setup()
--- vim.cmd.colorscheme("neopywal")
 -- [[ Load Snippets ]]
 -- First, setup LuaSnip with proper defaults
 require('luasnip').setup {
@@ -772,7 +786,6 @@ require('luasnip.loaders.from_lua').lazy_load {
 
 -- [[ Latex config ]]
 safe_require 'custom.latex_config'
-
 
 safe_require 'custom.snip'
 -- The line beneath this is called `modeline`. See `:help modeline`
