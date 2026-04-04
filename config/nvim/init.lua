@@ -288,9 +288,9 @@ require('lazy').setup({
       lspconfig.rust_analyzer.setup {
         cmd = { 'rust-analyzer' },
         filetypes = { 'rust' },
-        root_dir = require('lspconfig.util').root_pattern('Cargo.toml'),
+        root_dir = require('lspconfig.util').root_pattern 'Cargo.toml',
         on_attach = function(client, bufnr)
-          vim.diagnostic.enable(bufnr)
+          vim.diagnostic.enable(true)
         end,
         settings = {
           ['rust-analyzer'] = {
@@ -300,6 +300,15 @@ require('lazy').setup({
             cargo = {
               allTargets = true,
             },
+          },
+          files = { watcher = 'server' },
+          cargo = { targetDir = true },
+          check = { command = 'clippy' },
+          inlayHints = {
+            bindingModeHints = { enabled = true },
+            closureCaptureHints = { enabled = true },
+            closureReturnTypeHints = { enable = 'always' },
+            maxLength = 100,
           },
         },
       }
