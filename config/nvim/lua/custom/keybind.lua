@@ -1,6 +1,5 @@
 local vim = vim
 
-
 vim.keymap.set('x', 'p', 'P')
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -36,3 +35,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+
