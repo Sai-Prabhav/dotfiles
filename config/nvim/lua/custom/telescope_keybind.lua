@@ -28,10 +28,21 @@ vim.keymap.set('n', '<leader>s/', function()
   }
 end, { desc = '[S]earch [/] in Open Files' })
 
--- Shortcut for searching your Neovim configuration files
+-- Shortcut for searching important directories
+--
 vim.keymap.set('n', '<leader>sc', function()
   builtin.find_files { cwd = '~/dotfiles/' }
 end, { desc = '[S]earch [C]onfigc files' })
+
 vim.keymap.set('n', '<leader>sn', function()
   builtin.find_files { cwd = '~/dotfiles/config/nvim/' }
 end, { desc = '[S]earch [N]eovim files' })
+
+
+vim.keymap.set('n', '<leader>sd', function()
+  builtin.find_files { cwd = '~/Documents/diary/' }
+end, { desc = '[S]earch [D]iary' })
+
+vim.keymap.set('n', '<leader>so', function()
+  builtin.find_files { cwd = '~/Documents/notes/' }
+end, { desc = '[S]earch N[o]tes' })
