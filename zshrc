@@ -122,6 +122,7 @@ export PATH="/usr/lib/rustup/bin:$PATH"
 # opencode
 export PATH=/home/greenflame41/.opencode/bin:$PATH
 
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 disksp() {
     local dir="${1:-./}"
