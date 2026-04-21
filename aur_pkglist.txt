@@ -1,0 +1,17 @@
+bookokrat-bin
+dotter-rs
+feishin-electron-bin
+golly
+mindustry
+mongodb-bin
+ocrmypdf
+postman-bin
+preload
+quarto-cli
+rmup
+rstudio-desktop-bin
+visit-bin
+visual-studio-code-bin
+yay
+zen-browser-bin
+zsh-theme-powerlevel10k-git
