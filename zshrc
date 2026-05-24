@@ -118,6 +118,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/home/greenflame41/.local/bin:$PATH"
 export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/dev:$PATH"
 export PATH="/usr/lib/rustup/bin:$PATH"
 # opencode
 export PATH=/home/greenflame41/.opencode/bin:$PATH
@@ -134,13 +135,16 @@ disksp() {
 
 alias icat="kitten icat"
 alias ls='ls --color --hyperlink=auto'
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
 
 [ -f "/home/greenflame41/.ghcup/env" ] && . "/home/greenflame41/.ghcup/env" # ghcup-env
 
 eval "$(zoxide init zsh)"
 
 alias cd='z'
-alias cat='bat'
+
+
+## SPACK STUFF ##
+export SPACK_ROOT=~/spack/
+export PATH="$SPACK_ROOT/bin:$PATH"
+export DEAL_II_DIR=~/bin/deal.II/
+export CGSEM_DIR=~/Desktop/ssrp/cgsem/

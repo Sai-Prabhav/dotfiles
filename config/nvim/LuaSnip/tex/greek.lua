@@ -38,4 +38,5 @@ return {
 	s({ trig = "@F", wordTrig = true, snippetType = "autosnippet" }, t("\\Phi")),
 	s({ trig = "@Y", wordTrig = true, snippetType = "autosnippet" }, t("\\Psi")),
 	s({ trig = "@W", wordTrig = true, snippetType = "autosnippet" }, t("\\Omega")),
+	s({ trig = "@O", wordTrig = true, snippetType = "autosnippet" }, t("\\Omega")),
 }

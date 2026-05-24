@@ -1,4 +1,4 @@
---
+--ini
 --
 local function safe_require(mod)
   local ok, result = pcall(require, mod)
@@ -472,7 +472,7 @@ require('lazy').setup({
           stdin = true,
         },
         clang_format = {
-          prepend_args = { '--style={IndentWidth: 2, TabWidth: 2, UseTab: Never,ColumnLimit: 80 }' },
+          prepend_args = {},
         },
         prettier = {
           prepend_args = { '--print-width', '56' },
@@ -761,6 +761,10 @@ safe_require 'custom.latex_config'
 
 safe_require 'custom.snip'
 safe_require 'custom.telescope_keybind'
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevelstart = 99
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

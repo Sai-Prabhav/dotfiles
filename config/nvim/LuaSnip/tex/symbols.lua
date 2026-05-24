@@ -145,6 +145,8 @@ local symbols = {
   'exp',
   'log',
   'ln',
+  'min',
+  'max',
 }
 
 -- Extended set of math symbols and operators
