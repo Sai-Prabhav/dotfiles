@@ -78,12 +78,12 @@ return {
     trig = 'par',
     snippetType = 'autosnippet',
     priority = 100,
-    dscr = 'Insert \\partial{}',
+    dscr = 'Insert \\partial',
     condition = in_mathzone,
   }, {
-    t '\\partial{',
+    t '\\partial',
     i(1),
-    t '}',
+    t ' ',
     i(0),
   }),
 
@@ -110,6 +110,18 @@ return {
     condition = in_mathzone,
   }, {
     t '\\vec{',
+    i(1),
+    t '}',
+    i(0),
+  }),
+  s({
+    trig = 'bm',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'Insert \\bm{}',
+    condition = in_mathzone,
+  }, {
+    t '\\bm{',
     i(1),
     t '}',
     i(0),
@@ -483,6 +495,18 @@ return {
     t '\\left[ ',
     i(1),
     t ' \\right] ',
+    i(0),
+  }),
+  s({
+    trig = 'lrd[]',
+    snippetType = 'autosnippet',
+    priority = 200,
+    dscr = 'Insert \\llbracket ... \\rrbracket]',
+    condition = in_mathzone,
+  }, {
+    t '\\doublebracket*{  ',
+    i(1),
+    t '  } ',
     i(0),
   }),
   s({
